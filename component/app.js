@@ -11,6 +11,7 @@ class App extends Component {
     super(props);
 
     this.state = { location: null };
+    this.checkNowOnClick = this.checkNowOnClick.bind(this);
   }
   componentWillMount() {
     if (navigator.geolocation) {
@@ -21,13 +22,22 @@ class App extends Component {
     }
     console.log('nothing');
   }
+  checkNowOnClick(e) {
+    if (navigator.geolocation) {
+      this.setState({ location: null });
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.setState({ location: position });
+        this.props.ge(this.state.location.coords);
+      });
+    }
+  }
   render() {
     if (this.state.location) {
       const location = this.state.location.coords;
       return (
         <div>
           <DisplayBoard location={location} />
-          <button>Check Now</button>
+          <button onClick={this.checkNowOnClick} className="check-button">Check Now</button>
         </div>
       );
     }
@@ -35,8 +45,6 @@ class App extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ ge: getNewAirData }, dispatch);
-};
+const mapDispatchToProps = (dispatch) => bindActionCreators({ ge: getNewAirData }, dispatch);
 
 export default connect(null, mapDispatchToProps)(App);

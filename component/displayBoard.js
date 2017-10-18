@@ -4,18 +4,43 @@ import { connect } from 'react-redux';
 class DisplayBoard extends Component {
   constructor(props) {
     super();
+
+    this.state = { pm25Data: null };
+    this.updatePM25 = this.updatePM25.bind(this);
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.airData[0])
+      this.updatePM25(nextProps.airData[0].data.iaqi.pm25.v)
+  }
+
+  // Create the effect of counting
+  updatePM25(pm25Data) {
+    for (let i = 0; i < pm25Data; i++) {
+      setTimeout(
+        ((i) => {
+          return () => {
+            this.setState({ pm25Data: i});
+          }
+        })(i), ((i) => {
+          return i*60
+        })(i)
+      );
+    }
+    return pm25Data;
   }
   render() {
-    console.log('receive', this.props.airData[0]);
+    // console.log('receive', this.props.airData[0]);
     if (this.props.airData[0]) {
       return (
         <div>
-          <h2>AirNow</h2>
-          <h1>{this.props.airData[0].data.city.name}</h1>          
-          <h5>lat: {this.props.location.latitude}</h5>
-          <h5>lon: {this.props.location.longitude}</h5>
-          <h1>Air Quality Index: {this.props.airData[0].data.aqi}</h1>
-          <h1>PM2.5: {this.props.airData[0].data.iaqi.pm25.v}</h1>
+          <div>
+            <h2>AirNow</h2>
+          </div>
+          <h1 className="city">{this.props.airData[0].data.city.name}</h1>
+          <div className="main-meter">
+            <div className="pm25"> {this.state.pm25Data} </div>
+            <h1>PM2.5</h1>
+          </div>
         </div>
       );
     }
