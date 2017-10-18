@@ -8,5 +8,5 @@ The aim of this project is to provide a instance air quality index to the users 
 
 
 
-Backend API powered by [AirVisual](https://airvisual.com/)
+Backend API powered by [The World Air Quality Index (AQI) Project](http://waqi.info/)
 
