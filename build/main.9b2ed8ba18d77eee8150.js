@@ -35032,6 +35032,7 @@ var App = function (_Component) {
     var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
     _this.state = { location: null };
+    _this.checkNowOnClick = _this.checkNowOnClick.bind(_this);
     return _this;
   }
 
@@ -35049,6 +35050,19 @@ var App = function (_Component) {
       console.log('nothing');
     }
   }, {
+    key: 'checkNowOnClick',
+    value: function checkNowOnClick(e) {
+      var _this3 = this;
+
+      if (navigator.geolocation) {
+        this.setState({ location: null });
+        navigator.geolocation.getCurrentPosition(function (position) {
+          _this3.setState({ location: position });
+          _this3.props.ge(_this3.state.location.coords);
+        });
+      }
+    }
+  }, {
     key: 'render',
     value: function render() {
       if (this.state.location) {
@@ -35059,7 +35073,7 @@ var App = function (_Component) {
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__displayBoard__["a" /* default */], { location: location }),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'button',
-            null,
+            { onClick: this.checkNowOnClick, className: 'check-button' },
             'Check Now'
           )
         );
@@ -35126,50 +35140,74 @@ var DisplayBoard = function (_Component) {
   function DisplayBoard(props) {
     _classCallCheck(this, DisplayBoard);
 
-    return _possibleConstructorReturn(this, (DisplayBoard.__proto__ || Object.getPrototypeOf(DisplayBoard)).call(this));
+    var _this = _possibleConstructorReturn(this, (DisplayBoard.__proto__ || Object.getPrototypeOf(DisplayBoard)).call(this));
+
+    _this.state = { pm25Data: null };
+    _this.updatePM25 = _this.updatePM25.bind(_this);
+    return _this;
   }
 
   _createClass(DisplayBoard, [{
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      if (nextProps.airData[0]) this.updatePM25(nextProps.airData[0].data.iaqi.pm25.v);
+    }
+
+    // Create the effect of counting
+
+  }, {
+    key: 'updatePM25',
+    value: function updatePM25(pm25Data) {
+      var _this2 = this;
+
+      for (var i = 0; i < pm25Data; i++) {
+        setTimeout(function (i) {
+          return function () {
+            _this2.setState({ pm25Data: i });
+          };
+        }(i), function (i) {
+          return i * 60;
+        }(i));
+      }
+      return pm25Data;
+    }
+  }, {
     key: 'render',
     value: function render() {
-      console.log('receive', this.props.airData[0]);
+      // console.log('receive', this.props.airData[0]);
       if (this.props.airData[0]) {
         return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
           null,
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'h2',
+            'div',
             null,
-            'AirNow'
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'h2',
+              null,
+              'AirNow'
+            )
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'h1',
-            null,
+            { className: 'city' },
             this.props.airData[0].data.city.name
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'h5',
-            null,
-            'lat: ',
-            this.props.location.latitude
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'h5',
-            null,
-            'lon: ',
-            this.props.location.longitude
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'h1',
-            null,
-            'Air Quality Index: ',
-            this.props.airData[0].data.aqi
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'h1',
-            null,
-            'PM2.5: ',
-            this.props.airData[0].data.iaqi.pm25.v
+            'div',
+            { className: 'main-meter' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'div',
+              { className: 'pm25' },
+              ' ',
+              this.state.pm25Data,
+              ' '
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'h1',
+              null,
+              'PM2.5'
+            )
           )
         );
       }
@@ -36224,4 +36262,4 @@ var _temp = function () {
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=main.49458d55a0da7432517c.js.map
+//# sourceMappingURL=main.9b2ed8ba18d77eee8150.js.map
