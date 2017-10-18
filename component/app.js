@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 
 import DisplayBoard from './displayBoard';
 import getNewAirData from '../actions/index';
-
+import '../css/style.css';
 
 class App extends Component {
   constructor(props) {

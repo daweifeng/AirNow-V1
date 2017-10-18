@@ -1,0 +1,51 @@
+html {
+  background: #ffffff;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.check-button {
+  background-color: #000000; /* Green */
+  border: none;
+  color: #ffffff;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  font-size: 16px;
+  margin: 0 auto;
+  border: solid #000000;
+}
+
+.check-button:hover{
+  cursor: pointer;
+  color: #000000;
+  background-color: #ffffff;
+  border: solid #000000;
+}
+
+.main-meter {
+  text-align: center;
+  width: 400px;
+  height: 400px;
+  margin: 10px auto;
+  margin-top: 150px;
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+.pm25 {
+  font-size: 9rem;
+  font-weight: 400;
+  padding-top: 90px;
+  font-family: 'Passion One', cursive;
+}
+
+.city {
+  text-align: center;
+  width: 500px;
+  margin: auto;
+  font-size: 3rem;
+  color: #000000;
+  font-weight: 200;
+}
+/*# sourceMappingURL=style.css.map*/

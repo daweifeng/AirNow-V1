@@ -1,7 +1,10 @@
-let HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require('path');
+
 module.exports = {
   entry: [
-    "babel-polyfill",
+    'babel-polyfill',
     'react-hot-loader/patch',
     './index.js',
   ],
@@ -14,19 +17,26 @@ module.exports = {
         loader: ['react-hot-loader/webpack', 'babel-loader'],
       }, {
         test: /\.css$/, // Only .css files
-        loader: 'style!css' // Run both loaders  
-      }
-    ]
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: 'css-loader',
+        }),
+      }, {
+        test: /\.json$/,
+        loader: 'json-loader',
+      },
+    ],
   },
   output: {
     filename: '[name].[hash].js',
-    path: __dirname + '/build',
+    path: path.join(__dirname, '/build'),
   },
   plugins: [
-    new HtmlWebpackPlugin({ 
+    new HtmlWebpackPlugin({
       template: './index.html',
       filename: 'index.html',
       inject: 'body',
     }),
+    new ExtractTextPlugin('style.css'),
   ],
-}
+};
