@@ -41,7 +41,7 @@ class App extends Component {
         </div>
       );
     }
-    return (<h1>loading</h1>);
+    return (<h1 className="loading">Loading</h1>);
   }
 }
 
