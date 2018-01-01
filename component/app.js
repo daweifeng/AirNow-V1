@@ -20,11 +20,12 @@ class App extends Component {
         this.props.ge(this.state.location.coords);
       });
     }
-    console.log('nothing');
+    // console.log('nothing');
   }
   checkNowOnClick(e) {
     if (navigator.geolocation) {
       this.setState({ location: null });
+      document.querySelector("body").className = '';
       navigator.geolocation.getCurrentPosition((position) => {
         this.setState({ location: position });
         this.props.ge(this.state.location.coords);

@@ -1,8 +1,13 @@
 html {
   background: #ffffff;
   font-family: 'Open Sans', sans-serif;
-  height: 100%;
 }
+
+body {
+  margin: 0px;
+  min-height: 100vh;
+}
+
 
 .bg-healthy {
   background: linear-gradient(245deg, #6BEFAC, #6FF0E9);
@@ -23,7 +28,7 @@ html {
 }
 
 .bg-danger {
-  background: linear-gradient(245deg, #B093EF, #2E2F66));
+  background: linear-gradient(245deg, #B093EF, #2E2F66);
 }
 
 .loading {
@@ -52,6 +57,7 @@ html {
 .airnow {
   font-family: 'Pacifico', cursive;
   color: white;
+  font-size: 1rem;
 }
 
 .check-button {

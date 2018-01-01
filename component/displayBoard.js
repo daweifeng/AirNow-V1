@@ -25,21 +25,21 @@ class DisplayBoard extends Component {
             const pm25 = this.state.pm25Data;
             if (pm25 <= 50) {
               document.querySelector(".main-meter").style.color = "#70F1CE";
-              document.querySelector("html").classList.add('bg-healthy');
+              document.querySelector("body").classList.add('bg-healthy');
             } else if (pm25 <= 100) {
               document.querySelector(".main-meter").style.color = "#EDC77A";
-              document.querySelector("html").classList.add('bg-moderate');
+              document.querySelector("body").classList.add('bg-moderate');
             } else if (pm25 <= 150) {
               document.querySelector(".main-meter").style.color = "#EFA556";
-              document.querySelector("html").classList.add('bg-sensitive');
+              document.querySelector("body").classList.add('bg-sensitive');
             } else if (pm25 <= 200) {
               document.querySelector(".main-meter").style.color = "#FE7148";
-              document.querySelector("html").classList.add('bg-unhealthy');
+              document.querySelector("body").classList.add('bg-unhealthy');
             } else if (pm25 < 300) {
               document.querySelector(".main-meter").style.color = "#B093EF";
-              document.querySelector("html").classList.add('bg-danger');              
+              document.querySelector("body").classList.add('bg-danger');
             }
-          }
+          };
         })(i), ((i) => {
           return i*60
         })(i)
@@ -53,7 +53,7 @@ class DisplayBoard extends Component {
       return (
         <div>
           <div>
-            <h2 className="airnow">AirNow</h2>
+            <div className="airnow">AirNow</div>
           </div>
           <h1 className="city">{this.props.airData[0].data.city.name}</h1>
           <div className="main-meter">
