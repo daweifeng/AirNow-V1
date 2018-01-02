@@ -32,6 +32,15 @@ body {
   background: linear-gradient(245deg, #B093EF, #2E2F66);
 }
 
+.bg-hazardous {
+  background: linear-gradient(245deg, #7E0023, #000000);
+}
+
+.condition {
+  width: 50%;
+  margin: auto;
+}
+
 .loading {
   margin-top: 30%;
   text-align: center;
@@ -93,8 +102,13 @@ body {
 .pm25 {
   font-size: 9rem;
   font-weight: 400;
-  padding-top: 12%;
   font-family: 'Passion One', cursive;
+}
+
+.title {
+  padding-top: 12%;
+  margin: auto;
+  width: 50%;
 }
 
 .city {

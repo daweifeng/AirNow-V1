@@ -5,7 +5,7 @@ class DisplayBoard extends Component {
   constructor(props) {
     super();
 
-    this.state = { pm25Data: null };
+    this.state = { pm25Data: null, codition: null };
     this.updatePM25 = this.updatePM25.bind(this);
   }
   componentWillReceiveProps(nextProps) {
@@ -26,18 +26,27 @@ class DisplayBoard extends Component {
             if (pm25 <= 50) {
               document.querySelector(".main-meter").style.color = "#70F1CE";
               document.querySelector("body").classList.add('bg-healthy');
+              this.setState({ codition: 'Healthy' });
             } else if (pm25 <= 100) {
               document.querySelector(".main-meter").style.color = "#EDC77A";
               document.querySelector("body").classList.add('bg-moderate');
+              this.setState({ codition: 'Moderate' });
             } else if (pm25 <= 150) {
               document.querySelector(".main-meter").style.color = "#EFA556";
               document.querySelector("body").classList.add('bg-sensitive');
+              this.setState({ codition: 'Unhealthy for Sensitive Groups' });
             } else if (pm25 <= 200) {
               document.querySelector(".main-meter").style.color = "#FE7148";
               document.querySelector("body").classList.add('bg-unhealthy');
+              this.setState({ codition: 'Unhealthy' });
             } else if (pm25 < 300) {
               document.querySelector(".main-meter").style.color = "#B093EF";
               document.querySelector("body").classList.add('bg-danger');
+              this.setState({ codition: 'Very Unhealthy' });
+            } else {
+              document.querySelector(".main-meter").style.color = "#000000";
+              document.querySelector("body").classList.add('bg-hazardous');
+              this.setState({ codition: 'Hazardous' });
             }
           };
         })(i), ((i) => {
@@ -56,9 +65,10 @@ class DisplayBoard extends Component {
             <div className="airnow">AirNow</div>
           </div>
           <h1 className="city">{this.props.airData[0].data.city.name}</h1>
-          <div className="main-meter">
+          <div className="main-meter animated bounceIn">
+            <h3 className="title">PM2.5</h3>
             <div className="pm25"> {this.state.pm25Data} </div>
-            <h1>PM2.5</h1>
+            <h3 className="condition">{this.state.codition}</h3>
           </div>
         </div>
       );
