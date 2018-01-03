@@ -1,7 +1,7 @@
 # AirNow - Real-Time Air Quality Index APP
 
 **DEPRECATED**
-This project has permanently moved to https://github.com/daweifeng/AirNow
+This project has been permanently moved to https://github.com/daweifeng/AirNow
 
 ## Introduce
 This project is aiming at providing a instant air quality index to the users based on their geolocation. 
